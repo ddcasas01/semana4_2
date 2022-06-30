@@ -108,7 +108,16 @@ class _HomePageState extends State<HomePage> {
                   setState(() {});
                 }),
 
-
+            Slider(
+                value: valueSlider2,
+                min: 0.0,
+                max: 120.0,
+                activeColor: Colors.deepOrange,
+                onChanged: (double value) {
+                  valueSlider2 = value;
+                  print(value);
+                  setState(() {});
+                }),
 
 
 
