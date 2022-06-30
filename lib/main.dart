@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:math';
 
 void main() {
   runApp(
@@ -24,6 +25,9 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   double valueSlider = 160.0;
   double valueSlider2 = 80.0;
+  double result = 0.0;
+  String result1="";
+  String result2="";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,7 +45,7 @@ class _HomePageState extends State<HomePage> {
           children: [
             Image.asset(
               'assets/images/image1.png',
-              height: 180.0,
+              height: 120.0,
             ),
             Text(
               "Height",
@@ -99,7 +103,7 @@ class _HomePageState extends State<HomePage> {
             ),
             Slider(
                 value: valueSlider2,
-                min: 0.0,
+                min: 2.0,
                 max: 120.0,
                 activeColor: Colors.deepOrange,
                 onChanged: (double value) {
@@ -107,27 +111,63 @@ class _HomePageState extends State<HomePage> {
                   print(value);
                   setState(() {});
                 }),
+            Container(
+                width: double.infinity,
+                child: ElevatedButton(
+                    onPressed: () {
+                      result = valueSlider2 / pow(valueSlider / 100, 2);
+                      if(result<18.5) {
+                        result1="Bajo Peso";
+                        result2="Alimentate mejor";
+                        print("Bajo Peso");
+                      } else if (result<25){
+                        result1="Peso Normal";
+                        result2="Esta todo bien";
 
-            Slider(
-                value: valueSlider2,
-                min: 0.0,
-                max: 120.0,
-                activeColor: Colors.deepOrange,
-                onChanged: (double value) {
-                  valueSlider2 = value;
-                  print(value);
-                  setState(() {});
-                }),
-
-
-
-
-
-
-
-
-
-
+                      }else{
+                        result1="Sobrepeso";
+                        result2="Deberias hacer ejercicio";
+                      }
+                      setState(() {});
+                    },
+                    child: const Text("Calcular"))),
+            Expanded(
+              child: Card(
+                margin: EdgeInsets.symmetric(horizontal: 16.0, vertical: 6.0),
+                color: Colors.white,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const SizedBox(
+                      width: double.infinity,
+                    ),
+                    const Text(
+                      "Resultado:",
+                      style: TextStyle(fontSize: 20.0),
+                    ),
+                    SizedBox(height: 4.0),
+                     Text(
+                      result1, textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 16.0,fontFamily: "Poppins_ExtraBold.ttf",color: Colors.pinkAccent,fontWeight: FontWeight.bold),
+                    ),
+                    Text(
+                      "${result.toStringAsFixed(2)}",
+                      style: const TextStyle(
+                          fontFamily: "Poppins-ExtraBold.ttf",
+                          fontSize: 60.0,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    Text(
+                      result2, textAlign: TextAlign.center,
+                      style: const TextStyle(fontSize: 16.0,fontFamily: "Poppins_ExtraBold.ttf"),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 16.0,
+            ),
           ],
         ),
       ),
