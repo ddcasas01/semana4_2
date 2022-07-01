@@ -28,9 +28,10 @@ class _HomePageState extends State<HomePage> {
   
   BMIBrain mandarinaBrain = BMIBrain(height: 182.0, weight: 76.0);
 
-  /*
+
   double valueSlider = 160.0;
   double valueSlider2 = 80.0;
+  /*
   double result = 0.0;
   String result1="";
   String result2="";
@@ -83,8 +84,8 @@ class _HomePageState extends State<HomePage> {
               textBaseline: TextBaseline.alphabetic,
               children: [
                 Text(
-                  //valueSlider.toInt().toStringAsFixed(2),
-                  mandarinaBrain.height.toStringAsFixed(2),
+                  valueSlider.toInt().toStringAsFixed(2),
+                  //mandarinaBrain.height.toStringAsFixed(2),
                   style: TextStyle(fontSize: 25.0, fontFamily: "Poppins.Bold"),
                 ),
                 SizedBox(
@@ -97,13 +98,15 @@ class _HomePageState extends State<HomePage> {
               ],
             ),
             Slider(
-                value: mandarinaBrain.height,
+                //value: mandarinaBrain.height,
+                value:valueSlider,
                 min: 100.0,
                 max: 200.0,
                 activeColor: Colors.deepPurple,
                 onChanged: (double value) {
-                  mandarinaBrain.height = value;
-                  print(value);
+                  valueSlider=value;
+                  //mandarinaBrain.height = value;
+                  //print(value);
                   setState(() {});
                 }),
             Text(
@@ -116,7 +119,8 @@ class _HomePageState extends State<HomePage> {
               textBaseline: TextBaseline.alphabetic,
               children: [
                 Text(
-                  mandarinaBrain.weight.toStringAsFixed(2),
+                  valueSlider2.toInt().toStringAsFixed(2),
+                  //mandarinaBrain.weight.toStringAsFixed(2),
                   style: TextStyle(fontSize: 25.0, fontFamily: "Poppins.Bold"),
                 ),
                 SizedBox(
@@ -129,13 +133,15 @@ class _HomePageState extends State<HomePage> {
               ],
             ),
             Slider(
-                value: mandarinaBrain.weight,
+              //value: mandarinaBrain.weight,
+              value:valueSlider2,
                 min: 2.0,
                 max: 120.0,
                 activeColor: Colors.deepOrange,
                 onChanged: (double value) {
-                  mandarinaBrain.weight = value;
-                  print(value);
+                  valueSlider2=value;
+                  //mandarinaBrain.weight = value;
+                  //print(value);
                   setState(() {});
                 }),
             Container(
@@ -144,8 +150,12 @@ class _HomePageState extends State<HomePage> {
                 margin: const EdgeInsets.symmetric(horizontal: 16.0),
                 child: ElevatedButton(
                     onPressed: () {
+                      mandarinaBrain.height=valueSlider;
+                      mandarinaBrain.weight=valueSlider2;
+                      setState((){});
                       //_calculateBMI()
-                    mandarinaBrain.calculateBMI();
+                    //mandarinaBrain.calculateBMI();
+                    //print(mandarinaBrain.calculateBMI());
                     },
                     child: const Text("Calcular"))),
             Expanded(
